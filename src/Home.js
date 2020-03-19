@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -16,6 +16,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
 import red from '@material-ui/core/colors/red';
 import lightBlue from '@material-ui/core/colors/lightBlue';
+import Badge from '@material-ui/core/Badge';
+import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
+
+import HeadLogo from './HeadLogo.png';
+
+import firebase from './firebase.js';
 
 import {
   BrowserRouter as Router,
@@ -69,6 +75,21 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  headerBadge: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
+  },
+  metric: {
+    borderWidth: '4px',
+    borderStyle: 'solid',
+    color: theme.palette.primary.main,
+    borderColor: theme.palette.secondary.light,
+    borderRadius: '50%',
+    width: '1.5em',
+    height: '1.5em',
+    margin: '0 auto'
+  }
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -76,7 +97,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 function Copyright() {
   return (
     <Typography variant="body2" color="red" align="center">
-      {'Copyright © '}
+      {'Copyright © Startup Odisha - Govt of Odisha '}
       <Link color="inherit" href="https://startupodisha.gov.in/">
         https://startupodisha.gov.in/
       </Link>{' '}
@@ -88,6 +109,15 @@ function Copyright() {
 
 export default function Home() {
   const classes = useStyles();
+  const [totalRegistration, setTotalRegistration] = useState("");
+
+  useEffect(() => {
+    var refD = firebase.database().ref();
+    refD.once("value")
+        .then(function(snapshot) {
+          setTotalRegistration(snapshot.numChildren()); 
+        });
+  })
 
   return (
     <React.Fragment>
@@ -96,43 +126,61 @@ export default function Home() {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <LI to="/"><img height="50px" width="50px" src="https://startupodisha.gov.in/wp-content/uploads/2017/05/logo_odishagov-2.jpg"/></LI>
+            <LI to="/"><img height="50px" width="50px" src={HeadLogo}/></LI>
           </IconButton>
-          <Typography variant="h6" className={classes.title} noWrap>
-              STARTUP ODISHA HACKATHON 2020
+          <Typography variant="subtitle1" className={classes.title}>
+              STARTUP ODISHA
           </Typography>
+          <Badge badgeContent={totalRegistration} color="secondary">
+            <span className={classes.headerBadge}>Submissions</span> &nbsp; <WbIncandescentIcon />
+          </Badge>
+          &nbsp; &nbsp; &nbsp; &nbsp; 
           <Button variant='contained'><LI to="/" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Home</LI></Button>
           &nbsp;
           <Button variant='contained'><LI to="/register" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Register</LI></Button>
         </Toolbar>
       </AppBar>
       <main>
-         <Container>
-          <Grid container spacing={4}>
+         
+          <Grid  spacing={4}>
             <Grid item xs={12} sm={6} md={12}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
                     image={Banner}
-                    title="STARTUP ODISHA HACKATHON BANNER"
+                    title="STARTUP ODISHA HACKATHON 2020"
                   />
                   
                 </Card>
               </Grid>
           </Grid>
-        </Container>
+        
         <div className={classes.heroContent}>
           <Container>
             <Typography component="h4" variant="h4" align="center" color="primary" gutterBottom>
-              STARTUP ODISHA HACKATHON on “Fighting Back nCOVID-19”
+              <b>STARTUP ODISHA HACKATHON on <i>“Fighting Back nCOVID-19”</i></b>
             </Typography>
-            <Typography variant="subtitle1" align="center" color="textSecondary" paragraph>
-              Startup Odisha proposes to conduct a virtual hackathon on fighting back nCOVID-19.
+            <Typography variant="subtitle1" align="center" color="black" paragraph>
+              <b>Startup Odisha proposes to conduct a virtual hackathon on fighting back nCOVID-19.</b>
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant='contained'><LI to="/register" color="footerText">REGISTER</LI></Button>
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Typography color="textSecondary" gutterBottom>
+                        # <u><b>Submissions as of now</b></u>
+                      </Typography>
+                      <Typography className={classes.metric} align="center" variant="h2">
+                        {totalRegistration}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} justify="center">
+                <Grid item>
+                  <Button variant='contained' color="secondary"><LI to="/register" style={{color: "white"}}>REGISTER NOW</LI></Button>
                 </Grid>
               </Grid>
             </div>
@@ -141,7 +189,7 @@ export default function Home() {
   
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              Problem Statement
+              <u><b>Problem Statement</b></u>
             </Typography>
         <Typography variant="body1" align="justify" color="textSecondary" paragraph>
               The current CoVid-19 (Coronavirus) outbreak has seen a heavy and quick deployment of case
@@ -157,9 +205,9 @@ administrative bandwidths.
   
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              Main objective of the Hackathon
+              <u><b>Main objective of the Hackathon</b></u>
             </Typography>
-     <Typography variant="body1" align="justify" color="textSecondary" paragraph>
+     <Typography variant="body1" align="justify" color="black" paragraph>
               <ul>
                 <li>
                   A self-quarantine management app for citizens affected by nCOVID-19.
@@ -177,9 +225,9 @@ curb postponement of exams.
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              Focus Area
+              <u><b>Focus Area</b></u>
             </Typography>
-     <Typography variant="body1" align="justify" color="textSecondary" paragraph>
+     <Typography variant="body1" align="justify" color="black" paragraph>
               <ul>
                 <li>
                   Risk communication and community engagement
@@ -208,9 +256,9 @@ curb postponement of exams.
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              Outcomes
+              <u><b>Outcomes</b></u>
             </Typography>
-     <Typography variant="body1" align="justify" color="textSecondary" paragraph>
+     <Typography variant="body1" align="justify" color="black" paragraph>
               <ul>
                 <li>
                   Top project shall be given awards of INR 1,00,000 (Rupees One Lakh only)
@@ -231,12 +279,12 @@ curb postponement of exams.
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              Rules and Regulations
+              <u><b>Rules and Regulations</b></u>
             </Typography>
           <Typography variant="body1" align="center" color="primary" gutterBottom>
               Following are the guidelines for Hackathon which need to be followed by each participant and team:
             </Typography>
-     <Typography variant="body1" align="justify" color="textSecondary" paragraph>
+     <Typography variant="body1" align="justify" color="black" paragraph>
               <ul>
                 <li>
                   20 Selected participants/ team will have to submit their solution (PowerPoint presentation, working app developed and other) by 29th March 2020, 1500 hrs through https://hackathon.jharkhand.gov.in link.
@@ -266,9 +314,9 @@ curb postponement of exams.
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              General Rules
+              <u><b>General Rules</b></u>
             </Typography>
-     <Typography variant="body1" align="justify" color="textSecondary" paragraph>
+     <Typography variant="body1" align="justify" color="black" paragraph>
               <ul>
                 <li>
                   Participants shall accept full responsibility for their own work and ensure to work as a team
@@ -299,9 +347,9 @@ curb postponement of exams.
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              Contact
+              <u><b>Contact</b></u>
             </Typography>
-        <Typography variant="body1" align="center" color="textSecondary" paragraph>
+        <Typography variant="body1" align="center" color="black" paragraph>
               <p>
                 Startup Secretariat, IED Odisha<br/>
         Plot No-123, Sector-A, Zone-A,<br/>

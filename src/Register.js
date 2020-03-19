@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +19,14 @@ import MenuItem from  '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from  '@material-ui/core/Select';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+import Badge from '@material-ui/core/Badge';
+
+import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
+
+import HeadLogo from './HeadLogo.png';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,7 +40,7 @@ import firebase from './firebase.js';
 function Copyright() {
   return (
     <Typography variant="body2" align="center">
-      {'Copyright © '}
+      {'Copyright © Startup Odisha - Govt of Odisha '}
       <Link color="inherit" href="https://startupodisha.gov.in/">
         https://startupodisha.gov.in/
       </Link>{' '}
@@ -76,7 +84,43 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement) => {
+export default function Register() {
+  const classes = useStyles();
+
+  const [teamName, setTeamName] = useState("");
+  const [stateUt, setStateUt] = useState("");
+  const [city, setCity] = useState("");
+  const [contactNo, setContactNo] = useState("");
+  const [email, setEmail] = useState("");
+  const [regNo, setRegNo] = useState("");
+  const [noOfParticipants, setNoOfParticipants] = useState("");
+  const [description, setDescription] = useState("");
+  const [phase, setPhase] = useState("");
+  const [YOL, setYOL] = useState("");
+  const [solution, setSolution] = useState("");
+  const [exist, setExist] = useState("");
+  const [tech, setTech] = useState("");
+  const [protoBudget, setProtoBudget] = useState("");
+  const [prodBudget, setProdBudget] = useState("");
+  const [requirement, setRequirement] = useState("");
+  const [openNotify, setOpenNotify] = useState("");
+  const [msgNotify, setMsgNotify] = useState("");
+
+  const [totalRegistration, setTotalRegistration] = useState("");
+
+  useEffect(() => {
+    var refD = firebase.database().ref();
+    refD.once("value")
+        .then(function(snapshot) {
+          setTotalRegistration(snapshot.numChildren()); 
+        });
+  })
+
+  const handleNotifyClose = () => {
+    setOpenNotify(false);
+  };
+
+  const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement) => {
   let data = {};
   data["Team Name"] = teamName;
   data["State UT"] = stateUt;
@@ -99,7 +143,8 @@ const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipan
   let check = false;
   for (var i = 0; i< a.length; i++){
     if(data[a[i]] === ""){
-      alert("'" + a[i] + "' field can't be empty")
+      setMsgNotify("'" + a[i] + "' field can't be empty")
+      setOpenNotify(true)
       check = true;
       break;
     }
@@ -112,33 +157,14 @@ const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipan
   // console.log(data);
   firebase.database().ref().push(data)
           .then(d => {
-            alert("Idea successfully submitted with ID " + d.path.pieces_[0].toString() + ". Good luck!")
+            setOpenNotify(true)
+            setMsgNotify("Idea successfully submitted with ID " + d.path.pieces_[0].toString() + ". Good luck!")
           })
           .catch(e => {
-            alert("Error occurred while submitting idea")
+            setOpenNotify(true)
+            setMsgNotify("Error occurred while submitting idea")
           })
 }
-
-
-export default function Register() {
-  const classes = useStyles();
-
-  const [teamName, setTeamName] = useState("");
-  const [stateUt, setStateUt] = useState("");
-  const [city, setCity] = useState("");
-  const [contactNo, setContactNo] = useState("");
-  const [email, setEmail] = useState("");
-  const [regNo, setRegNo] = useState("");
-  const [noOfParticipants, setNoOfParticipants] = useState("");
-  const [description, setDescription] = useState("");
-  const [phase, setPhase] = useState("");
-  const [YOL, setYOL] = useState("");
-  const [solution, setSolution] = useState("");
-  const [exist, setExist] = useState("");
-  const [tech, setTech] = useState("");
-  const [protoBudget, setProtoBudget] = useState("");
-  const [prodBudget, setProdBudget] = useState("");
-  const [requirement, setRequirement] = useState("");
 
   return (
    <React.Fragment>
@@ -146,11 +172,15 @@ export default function Register() {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <LI to="/"><img height="50px" width="50px" src="https://startupodisha.gov.in/wp-content/uploads/2017/05/logo_odishagov-2.jpg"/></LI>
+            <LI to="/"><img height="50px" width="50px" src={HeadLogo}/></LI>
           </IconButton>
-          <Typography variant="h6" className={classes.title} noWrap>
-              STARTUP ODISHA HACKATHON 2020
+          <Typography variant="subtitle1" className={classes.title}>
+              STARTUP ODISHA
           </Typography>
+          <Badge badgeContent={totalRegistration} color="secondary">
+            <span className={classes.headerBadge}>Submissions</span> &nbsp; <WbIncandescentIcon />
+          </Badge>
+          &nbsp; &nbsp; &nbsp; &nbsp; 
           <Button variant='contained'><LI to="/" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Home</LI></Button>
           &nbsp;
           <Button variant='contained'><LI to="/register" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Register</LI></Button>
@@ -162,7 +192,7 @@ export default function Register() {
 
       <div className={classes.paper} maxWidth="xs">
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <WbIncandescentIcon />
         </Avatar>
         <Typography component="h1" variant="h5" align='center' color="primary">
           STARTUP ODISHA HACKATHON 2020 Registration
@@ -228,7 +258,7 @@ export default function Register() {
                   <MenuItem value="Meghalaya">Meghalaya</MenuItem>
                   <MenuItem value="Mizoram">Mizoram</MenuItem>
                   <MenuItem value="Nagaland">Nagaland</MenuItem>
-                  <MenuItem value="Orissa">Orissa</MenuItem>
+                  <MenuItem value="Odisha">Odisha</MenuItem>
                   <MenuItem value="Punjab">Punjab</MenuItem>
                   <MenuItem value="Rajasthan">Rajasthan</MenuItem>
                   <MenuItem value="Sikkim">Sikkim</MenuItem>
@@ -309,6 +339,9 @@ export default function Register() {
 
             <Grid item xs={12} md={12}>
               <TextField value={description} onChange={e => setDescription(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <TextField value={solution} onChange={e => setSolution(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Problem Solution (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={6}>
               <InputLabel id="demo-simple-select-label">Phase of Idea</InputLabel>
@@ -395,6 +428,24 @@ export default function Register() {
         </form>
       </div>
     </Container>
+
+    <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={openNotify}
+        autoHideDuration={6000}
+        onClose={handleNotifyClose}
+        message={msgNotify}
+        action={
+          <React.Fragment>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleNotifyClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
 
      {/* Footer */}
       <footer className={classes.footer}>
