@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -25,6 +25,9 @@ import {
   Route,
   Link as LI
 } from "react-router-dom";
+
+
+import firebase from './firebase.js';
 
 function Copyright() {
   return (
@@ -73,8 +76,69 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement) => {
+  let data = {};
+  data["Team Name"] = teamName;
+  data["State UT"] = stateUt;
+  data["City"] = city;
+  data["Contact No"] = contactNo;
+  data["Email"] = email;
+  data["Startup Odisha Registration Number"] = regNo;
+  data["No of Participants"] = noOfParticipants;
+  data["Idea Description"] = description;
+  data["Phase of Idea"] = phase;
+  data["Year of Launch"] = YOL;
+  data["Problem Solution"] = solution;
+  data["If Product Exists"] = exist;
+  data["Technology used"] = tech;
+  data["Budget for Prototype"] = protoBudget;
+  data["Budget for Product"] = prodBudget;
+  data["Specific requirement for execution"] = requirement;
+
+  let a = Object.keys(data)
+  let check = false;
+  for (var i = 0; i< a.length; i++){
+    if(data[a[i]] === ""){
+      alert("'" + a[i] + "' field can't be empty")
+      check = true;
+      break;
+    }
+  }
+
+  if(check) {
+    return false;
+  }
+
+  // console.log(data);
+  firebase.database().ref().push(data)
+          .then(d => {
+            alert("Idea successfully submitted with ID " + d.path.pieces_[0].toString() + ". Good luck!")
+          })
+          .catch(e => {
+            alert("Error occurred while submitting idea")
+          })
+}
+
+
 export default function Register() {
   const classes = useStyles();
+
+  const [teamName, setTeamName] = useState("");
+  const [stateUt, setStateUt] = useState("");
+  const [city, setCity] = useState("");
+  const [contactNo, setContactNo] = useState("");
+  const [email, setEmail] = useState("");
+  const [regNo, setRegNo] = useState("");
+  const [noOfParticipants, setNoOfParticipants] = useState("");
+  const [description, setDescription] = useState("");
+  const [phase, setPhase] = useState("");
+  const [YOL, setYOL] = useState("");
+  const [solution, setSolution] = useState("");
+  const [exist, setExist] = useState("");
+  const [tech, setTech] = useState("");
+  const [protoBudget, setProtoBudget] = useState("");
+  const [prodBudget, setProdBudget] = useState("");
+  const [requirement, setRequirement] = useState("");
 
   return (
    <React.Fragment>
@@ -92,6 +156,7 @@ export default function Register() {
           <Button variant='contained'><LI to="/register" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Register</LI></Button>
         </Toolbar>
       </AppBar>
+    
     <Container component="main" maxWidth="md">
       
 
@@ -114,6 +179,8 @@ export default function Register() {
                 id="teamName"
                 label="Team Name"
                 autoFocus
+                value={teamName} 
+                onChange={e => setTeamName(e.target.value)}
               />
             </Grid>
 
@@ -122,7 +189,8 @@ export default function Register() {
                 <Select
                   variant="outlined"
                   style={{'width' : '100%'}}
-                  value={"Select"}
+                  value={noOfParticipants}
+                  onChange={e => setNoOfParticipants(e.target.value)}
                   
                 >
                   <MenuItem value="Select">Select</MenuItem>
@@ -137,8 +205,8 @@ export default function Register() {
                 <Select 
                   variant="outlined"
                   style={{'width' : '100%'}}
-                  value={"Select"}
-                  
+                  value={stateUt}                   
+                  onChange={e => setStateUt(e.target.value)}
                 >
                   <MenuItem value="Select">Select</MenuItem>
                   <MenuItem value="Andhra Pradesh">Andhra Pradesh</MenuItem>
@@ -178,7 +246,6 @@ export default function Register() {
                   <MenuItem value="Pondicherry">Pondicherry</MenuItem>
                   <MenuItem value="Ladakh">Ladakh</MenuItem>
                 </Select>
-
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -191,6 +258,8 @@ export default function Register() {
                 id="City"
                 label="City"
                 autoFocus
+                value={city} 
+                onChange={e => setCity(e.target.value)}
               />
             </Grid>
 
@@ -204,6 +273,8 @@ export default function Register() {
                 id="certificateNo"
                 label="Startup Odisha registration certificate no (NA if not applicable)"
                 autoFocus
+                value={regNo} 
+                onChange={e => setRegNo(e.target.value)}
               />
             </Grid>
 
@@ -217,6 +288,8 @@ export default function Register() {
                 id="Contact"
                 label="Contact No"
                 autoFocus
+                value={contactNo} 
+                onChange={e => setContactNo(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -229,19 +302,21 @@ export default function Register() {
                 id="Email"
                 label="Email ID"
                 autoFocus
+                value={email} 
+                onChange={e => setEmail(e.target.value)}
               />
             </Grid>
 
             <Grid item xs={12} md={12}>
-              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
+              <TextField value={description} onChange={e => setDescription(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={6}>
               <InputLabel id="demo-simple-select-label">Phase of Idea</InputLabel>
                 <Select
                   variant="outlined"
                   style={{'width' : '100%'}}
-                  value={"Select"}
-                  
+                  value={phase} 
+                  onChange={e => setPhase(e.target.value)}                  
                 >
                   <MenuItem value="Select">Select</MenuItem>
                   <MenuItem value="Ideation Phase">Ideation Phase</MenuItem>
@@ -256,8 +331,7 @@ export default function Register() {
                 <Select
                   variant="outlined"
                   style={{'width' : '100%'}}
-                  value={"NA"}
-                  
+                  value={YOL} onChange={e => setYOL(e.target.value)}                  
                 >
                   <MenuItem value="NA">NA</MenuItem>
                   <MenuItem value="2020">2020</MenuItem>
@@ -284,12 +358,12 @@ export default function Register() {
                 </Select>
             </Grid>
             <Grid item xs={12} md={6}>
-               <InputLabel id="demo-simple-select-label">Does Related solution already exist?</InputLabel>
+               <InputLabel  id="demo-simple-select-label">Does Related solution already exist?</InputLabel>
                 <Select
                   variant="outlined"
                   style={{'width' : '100%'}}
-                  value={"Select"}
-                  
+                  value={exist} 
+                  onChange={e => setExist(e.target.value)}                  
                 >
                   <MenuItem value="Select">Select</MenuItem>
                   <MenuItem value="Yes">Yes</MenuItem>
@@ -297,20 +371,20 @@ export default function Register() {
                 </Select>
             </Grid>
             <Grid item xs={12} md={12}>
-              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
+              <TextField value={tech} onChange={e => setTech(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={12}>
-              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Prototype Development in Rs (Approx.)  (Max 500 characters)" />
+              <TextField value={protoBudget} onChange={e => setProtoBudget(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Prototype Development in Rs (Approx.)  (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={12}>
-              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Minimal Viable product in Rs (Approx.) (Max 500 characters)" />
+              <TextField value={prodBudget} onChange={e => setProdBudget(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Minimal Viable product in Rs (Approx.) (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={12}>
-              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
+              <TextField value={requirement} onChange={e => setRequirement(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
             </Grid>
           </Grid>
           <Button
-            type="submit"
+            onClick = {() => submit(teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement)}
             fullWidth
             variant="contained"
             color="primary"
