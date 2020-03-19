@@ -82,6 +82,11 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  headerBadge: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
+  },
 }));
 
 export default function Register() {
