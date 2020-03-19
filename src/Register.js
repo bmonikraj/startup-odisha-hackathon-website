@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -27,6 +27,8 @@ import {
 } from "react-router-dom";
 
 import Banner from './Hackathon.jpg';
+
+import firebase from './firebase.js';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -85,8 +87,68 @@ function Copyright() {
   );
 }
 
+const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement) => {
+  let data = {};
+  data["Team Name"] = teamName;
+  data["State UT"] = stateUt;
+  data["City"] = city;
+  data["Contact No"] = contactNo;
+  data["Email"] = email;
+  data["Startup Odisha Registration Number"] = regNo;
+  data["No of Participants"] = noOfParticipants;
+  data["Idea Description"] = description;
+  data["Phase of Idea"] = phase;
+  data["Year of Launch"] = YOL;
+  data["Problem Solution"] = solution;
+  data["If Product Exists"] = exist;
+  data["Technology used"] = tech;
+  data["Budget for Prototype"] = protoBudget;
+  data["Budget for Product"] = prodBudget;
+  data["Specific requirement for execution"] = requirement;
+
+  let a = Object.keys(data)
+  let check = false;
+  for (var i = 0; i< a.length; i++){
+    if(data[a[i]] === ""){
+      alert("'" + a[i] + "' field can't be empty")
+      check = true;
+      break;
+    }
+  }
+
+  if(check) {
+    return false;
+  }
+
+  // console.log(data);
+  firebase.database().ref().push(data)
+          .then(d => {
+            alert("Idea successfully submitted with ID " + d.path.pieces_[0].toString() + ". Good luck!")
+          })
+          .catch(e => {
+            alert("Error occurred while submitting idea")
+          })
+}
+
 export default function Register() {
   const classes = useStyles();
+
+  const [teamName, setTeamName] = useState("");
+  const [stateUt, setStateUt] = useState("");
+  const [city, setCity] = useState("");
+  const [contactNo, setContactNo] = useState("");
+  const [email, setEmail] = useState("");
+  const [regNo, setRegNo] = useState("");
+  const [noOfParticipants, setNoOfParticipants] = useState("");
+  const [description, setDescription] = useState("");
+  const [phase, setPhase] = useState("");
+  const [YOL, setYOL] = useState("");
+  const [solution, setSolution] = useState("");
+  const [exist, setExist] = useState("");
+  const [tech, setTech] = useState("");
+  const [protoBudget, setProtoBudget] = useState("");
+  const [prodBudget, setProdBudget] = useState("");
+  const [requirement, setRequirement] = useState("");
 
   return (
     <React.Fragment>
@@ -118,8 +180,8 @@ export default function Register() {
           <form className={classes.root} noValidate autoComplete="off">
             <div>
               <FormControl className={classes.formControl}>
-                <InputLabel>Team Name</InputLabel>
-                <TextField required id="standard-required" label="Team Name" />
+                
+                <TextField value={teamName} onChange={e => setTeamName(e.target.value)} required id="standard-required" label="Team Name" />
               </FormControl>
             </div>
             <div>
@@ -128,8 +190,9 @@ export default function Register() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={"Select"}
-                  
+                  value={stateUt}
+                   
+                  onChange={e => setStateUt(e.target.value)}
                 >
                   <MenuItem value="Select">Select</MenuItem>
                   <MenuItem value="Andhra Pradesh">Andhra Pradesh</MenuItem>
@@ -173,26 +236,26 @@ export default function Register() {
             </div>
             <div>
               <FormControl className={classes.formControl}>
-                <InputLabel>City</InputLabel>
-                <TextField required id="standard-required" label="City" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel>Contact Number</InputLabel>
-                <TextField required id="standard-required" label="Contact Number" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel>Email</InputLabel>
-                <TextField required id="standard-required" label="Email" />
+                
+                <TextField value={city} onChange={e => setCity(e.target.value)} required id="standard-required" label="City" />
               </FormControl>
             </div>
             <div>
               <FormControl className={classes.formControl}>
                 
-                <TextField required id="standard-required" label="Startup Odisha registration certificate no (NA if not applicable)" />
+                <TextField value={contactNo} onChange={e => setContactNo(e.target.value)} required id="standard-required" label="Contact Number" />
+              </FormControl>
+            </div>
+            <div>
+              <FormControl className={classes.formControl}>
+                
+                <TextField value={email} onChange={e => setEmail(e.target.value)} required id="standard-required" label="Email" />
+              </FormControl>
+            </div>
+            <div>
+              <FormControl className={classes.formControl}>
+                
+                <TextField value={regNo} onChange={e => setRegNo(e.target.value)} required id="standard-required" label="Startup Odisha registration certificate no (NA if not applicable)" />
               </FormControl>
             </div>
             <div>
@@ -201,7 +264,8 @@ export default function Register() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={"Select"}
+                  value={noOfParticipants}
+                  onChange={e => setNoOfParticipants(e.target.value)}
                   
                 >
                   <MenuItem value="Select">Select</MenuItem>
@@ -214,7 +278,7 @@ export default function Register() {
             <div>
               <FormControl className={classes.formControl}>
                 
-                <TextField multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
+                <TextField value={description} onChange={e => setDescription(e.target.value)} multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
               </FormControl>
             </div>
             <div>
@@ -223,7 +287,7 @@ export default function Register() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={"Select"}
+                  value={phase} onChange={e => setPhase(e.target.value)}
                   
                 >
                   <MenuItem value="Select">Select</MenuItem>
@@ -241,7 +305,8 @@ export default function Register() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={"NA"}
+                  value={YOL} 
+                  onChange={e => setYOL(e.target.value)}
                   
                 >
                   <MenuItem value="NA">NA</MenuItem>
@@ -272,7 +337,7 @@ export default function Register() {
             <div>
               <FormControl className={classes.formControl}>
                 
-                <TextField multiline rows={10} required id="standard-required" label="Problem solution (Max 500 characters)" />
+                <TextField value={solution} onChange={e => setSolution(e.target.value)}  multiline rows={10} required id="standard-required" label="Problem solution (Max 500 characters)" />
               </FormControl>
             </div>
             <div>
@@ -281,7 +346,8 @@ export default function Register() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={"Select"}
+                  value={exist} 
+                  onChange={e => setExist(e.target.value)}
                   
                 >
                   <MenuItem value="Select">Select</MenuItem>
@@ -293,31 +359,33 @@ export default function Register() {
             <div>
               <FormControl className={classes.formControl}>
                 
-                <TextField multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
+                <TextField value={tech} onChange={e => setTech(e.target.value)} multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
               </FormControl>
             </div>
             <div>
               <FormControl className={classes.formControl}>
                 
-                <TextField multiline rows={10} required id="standard-required" label="Budget for Prototype Development in Rs (Approx.) (Max 500 characters)" />
+                <TextField value={protoBudget} onChange={e => setProtoBudget(e.target.value)} multiline rows={10} required id="standard-required" label="Budget for Prototype Development in Rs (Approx.) (Max 500 characters)" />
               </FormControl>
             </div>
             <div>
               <FormControl className={classes.formControl}>
                 
-                <TextField multiline rows={10} required id="standard-required" label="Budget for Minimal Viable product in Rs (Approx.) (Max 500 characters)" />
+                <TextField value={prodBudget} onChange={e => setProdBudget(e.target.value)} multiline rows={10} required id="standard-required" label="Budget for Minimal Viable product in Rs (Approx.) (Max 500 characters)" />
               </FormControl>
             </div>
             <div>
               <FormControl className={classes.formControl}>
                 
-                <TextField multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
+                <TextField value={requirement} onChange={e => setRequirement(e.target.value)} multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
               </FormControl>
             </div>
             <div>
               <FormControl className={classes.formControl}>
                 
-                <Button color="primary" variant="contained">
+                <Button color="primary" variant="contained"
+                  onClick = {() => submit(teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement)}
+                >
                   Submit
                 </Button>
               </FormControl>
