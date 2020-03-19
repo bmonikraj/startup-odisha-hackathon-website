@@ -132,7 +132,7 @@ export default function Home() {
               STARTUP ODISHA
           </Typography>
           <Badge badgeContent={totalRegistration} color="secondary">
-            <span className={classes.headerBadge}>Submissions</span> &nbsp; <WbIncandescentIcon />
+            <span className={classes.headerBadge}># Submissions</span> &nbsp; <WbIncandescentIcon />
           </Badge>
           &nbsp; &nbsp; &nbsp; &nbsp; 
           <Button variant='contained'><LI to="/" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Home</LI></Button>
