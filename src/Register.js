@@ -1,24 +1,24 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
 import MenuItem from  '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-
+import Select from  '@material-ui/core/Select';
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,55 +26,9 @@ import {
   Link as LI
 } from "react-router-dom";
 
-import Banner from './Hackathon.jpg';
-
-const useStyles = makeStyles(theme => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  formroot: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 480,
-  },
-}));
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://startupodisha.gov.in/">
         https://startupodisha.gov.in/
@@ -85,49 +39,104 @@ function Copyright() {
   );
 }
 
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  footer: {
+    backgroundColor: '#0d47a1',
+    color : 'white',
+    padding: theme.spacing(6),
+  },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 export default function Register() {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+   <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
+      <AppBar position="static">
         <Toolbar>
-          <LI to="/"><img height="50px" width="50px" src="https://startupodisha.gov.in/wp-content/uploads/2017/05/logo_odishagov-2.jpg"/></LI>
-          &nbsp;
-          <Typography variant="h6" color="inherit" noWrap>
-           	STARTUP ODISHA HACKATHON 2020
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <LI to="/"><img height="50px" width="50px" src="https://startupodisha.gov.in/wp-content/uploads/2017/05/logo_odishagov-2.jpg"/></LI>
+          </IconButton>
+          <Typography variant="h6" className={classes.title} noWrap>
+              STARTUP ODISHA HACKATHON 2020
           </Typography>
-          &nbsp;&nbsp;
-          <Button style={{right: "0px"}} color="secondary" variant="contained">
-            <LI to="/">Home</LI>
-          </Button>
-          &nbsp;&nbsp;
-          <Button style={{right: "0px"}} color="secondary" variant="contained">
-          	<LI to="/register">Register</LI>
-          </Button>
+          <Button variant='contained'><LI to="/" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Home</LI></Button>
+          &nbsp;
+          <Button variant='contained'><LI to="/register" color="inherit" style={{'fontSize' : '10px', 'fontWeight' : 'bold'}}>Register</LI></Button>
         </Toolbar>
       </AppBar>
-      <main>
-	
-	<Container>
-	  <Typography component="h5" variant="h5" align="center" color="textPrimary" gutterBottom>
-              STARTUP ODISHA HACKATHON 2020 Registration
-            </Typography>
-	  		<Typography variant="body1" align="center" color="textSecondary" paragraph>
-          <form className={classes.root} noValidate autoComplete="off">
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel>Team Name</InputLabel>
-                <TextField required id="standard-required" label="Team Name" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">State / UT</InputLabel>
+    <Container component="main" maxWidth="md">
+      
+
+      <div className={classes.paper} maxWidth="xs">
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5" align='center' color="primary">
+          STARTUP ODISHA HACKATHON 2020 Registration
+        </Typography>
+        <form className={classes.form} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                autoComplete="fname"
+                name="teamName"
+                variant="outlined"
+                required
+                fullWidth
+                id="teamName"
+                label="Team Name"
+                autoFocus
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <InputLabel id="demo-simple-select-label">Number of participants</InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  variant="outlined"
+                  style={{'width' : '100%'}}
+                  value={"Select"}
+                  
+                >
+                  <MenuItem value="Select">Select</MenuItem>
+                  <MenuItem value="1">One</MenuItem>
+                  <MenuItem value="2">Two</MenuItem>
+                  <MenuItem value="3">Three</MenuItem>
+                </Select>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+                <InputLabel id="demo-simple-select-label">State / UT</InputLabel>
+                <Select 
+                  variant="outlined"
+                  style={{'width' : '100%'}}
                   value={"Select"}
                   
                 >
@@ -169,60 +178,68 @@ export default function Register() {
                   <MenuItem value="Pondicherry">Pondicherry</MenuItem>
                   <MenuItem value="Ladakh">Ladakh</MenuItem>
                 </Select>
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel>City</InputLabel>
-                <TextField required id="standard-required" label="City" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel>Contact Number</InputLabel>
-                <TextField required id="standard-required" label="Contact Number" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel>Email</InputLabel>
-                <TextField required id="standard-required" label="Email" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <TextField required id="standard-required" label="Startup Odisha registration certificate no (NA if not applicable)" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Number of participants</InputLabel>
+
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="City"
+                variant="outlined"
+                required
+                fullWidth
+                id="City"
+                label="City"
+                autoFocus
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="certificate"
+                variant="outlined"
+                required
+                fullWidth
+                id="certificateNo"
+                label="Startup Odisha registration certificate no (NA if not applicable)"
+                autoFocus
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="Contact"
+                variant="outlined"
+                required
+                fullWidth
+                id="Contact"
+                label="Contact No"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="Email"
+                variant="outlined"
+                required
+                fullWidth
+                id="Email"
+                label="Email ID"
+                autoFocus
+              />
+            </Grid>
+
+            <Grid item xs={12} md={12}>
+              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <InputLabel id="demo-simple-select-label">Phase of Idea</InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={"Select"}
-                  
-                >
-                  <MenuItem value="Select">Select</MenuItem>
-                  <MenuItem value="1">One</MenuItem>
-                  <MenuItem value="2">Two</MenuItem>
-                  <MenuItem value="3">Three</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <TextField multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Phase of Idea</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  variant="outlined"
+                  style={{'width' : '100%'}}
                   value={"Select"}
                   
                 >
@@ -233,14 +250,12 @@ export default function Register() {
                   <MenuItem value="Testing in process">Testing in process</MenuItem>
                   <MenuItem value="Product available">Product available</MenuItem>
                 </Select>
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">If Product available, Year of launch</InputLabel>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <InputLabel id="demo-simple-select-label">If Product available, Year of launch</InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  variant="outlined"
+                  style={{'width' : '100%'}}
                   value={"NA"}
                   
                 >
@@ -267,20 +282,12 @@ export default function Register() {
                   <MenuItem value="2001">2001</MenuItem>
                   <MenuItem value="2000">2000</MenuItem>
                 </Select>
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <TextField multiline rows={10} required id="standard-required" label="Problem solution (Max 500 characters)" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Does Related solution already exist?</InputLabel>
+            </Grid>
+            <Grid item xs={12} md={6}>
+               <InputLabel id="demo-simple-select-label">Does Related solution already exist?</InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  variant="outlined"
+                  style={{'width' : '100%'}}
                   value={"Select"}
                   
                 >
@@ -288,57 +295,44 @@ export default function Register() {
                   <MenuItem value="Yes">Yes</MenuItem>
                   <MenuItem value="No">No</MenuItem>
                 </Select>
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <TextField multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <TextField multiline rows={10} required id="standard-required" label="Budget for Prototype Development in Rs (Approx.) (Max 500 characters)" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <TextField multiline rows={10} required id="standard-required" label="Budget for Minimal Viable product in Rs (Approx.) (Max 500 characters)" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <TextField multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
-              </FormControl>
-            </div>
-            <div>
-              <FormControl className={classes.formControl}>
-                
-                <Button color="primary" variant="contained">
-                  Submit
-                </Button>
-              </FormControl>
-            </div>
-          </form>      
-        </Typography>
-	</Container>
-	
-    </main>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Prototype Development in Rs (Approx.)  (Max 500 characters)" />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Minimal Viable product in Rs (Approx.) (Max 500 characters)" />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <TextField style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Register
+          </Button>
+        </form>
+      </div>
+    </Container>
 
-      {/* Footer */}
-      <footer className={classes.footer} >
-        <Typography variant="h6" align="center" gutterBottom>
+     {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom color='footerText'>
           A "Startup Odisha" Initiative
         </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+        <Typography variant="subtitle1" align="center" color="footerText" component="p">
           Let's fight against nCOVID-19 together
         </Typography>
         <Copyright />
       </footer>
       {/* End footer */}
-    </React.Fragment>
+  </React.Fragment>
   );
 }
