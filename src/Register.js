@@ -33,8 +33,6 @@ import {
   Route,
   Link as LI
 } from "react-router-dom";
-
-
 import firebase from './firebase.js';
 
 function Copyright() {
@@ -110,6 +108,9 @@ export default function Register() {
   const [requirement, setRequirement] = useState("");
   const [openNotify, setOpenNotify] = useState("");
   const [msgNotify, setMsgNotify] = useState("");
+  const [category, setCategory] = useState("");
+  const [videoLink, setVideoLink] = useState("");
+  const [pdfLink, setPdfLink] = useState("");
 
   const [totalRegistration, setTotalRegistration] = useState("");
 
@@ -125,7 +126,7 @@ export default function Register() {
     setOpenNotify(false);
   };
 
-  const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement) => {
+  const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement, category, videoLink, pdfLink) => {
   let data = {};
   data["Team Name"] = teamName;
   data["State UT"] = stateUt;
@@ -143,6 +144,9 @@ export default function Register() {
   data["Budget for Prototype"] = protoBudget;
   data["Budget for Product"] = prodBudget;
   data["Specific requirement for execution"] = requirement;
+  data["Category"] = category;
+  data["Video Link"] = videoLink;
+  data["PDF Link"] = pdfLink;
 
   let a = Object.keys(data)
   let check = false;
@@ -292,7 +296,6 @@ export default function Register() {
                 fullWidth
                 id="City"
                 label="City"
-                autoFocus
                 value={city} 
                 onChange={e => setCity(e.target.value)}
               />
@@ -307,7 +310,7 @@ export default function Register() {
                 fullWidth
                 id="certificateNo"
                 label="Startup Odisha registration certificate no (NA if not applicable)"
-                autoFocus
+
                 value={regNo} 
                 onChange={e => setRegNo(e.target.value)}
               />
@@ -322,7 +325,6 @@ export default function Register() {
                 fullWidth
                 id="Contact"
                 label="Contact No"
-                autoFocus
                 value={contactNo} 
                 onChange={e => setContactNo(e.target.value)}
               />
@@ -336,7 +338,6 @@ export default function Register() {
                 fullWidth
                 id="Email"
                 label="Email ID"
-                autoFocus
                 value={email} 
                 onChange={e => setEmail(e.target.value)}
               />
@@ -408,6 +409,19 @@ export default function Register() {
                   <MenuItem value="No">No</MenuItem>
                 </Select>
             </Grid>
+            <Grid item xs={12} md={6}>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                <Select
+                  variant="outlined"
+                  style={{'width' : '100%'}}
+                  value={category} 
+                  onChange={e => setCategory(e.target.value)}                  
+                >
+                  <MenuItem value="Select">Select</MenuItem>
+                  <MenuItem value="Startup">Startup</MenuItem>
+                  <MenuItem value="Individual">Individual</MenuItem>
+                </Select>
+            </Grid>
             <Grid item xs={12} md={12}>
               <TextField value={tech} onChange={e => setTech(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
             </Grid>
@@ -419,6 +433,30 @@ export default function Register() {
             </Grid>
             <Grid item xs={12} md={12}>
               <TextField value={requirement} onChange={e => setRequirement(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                autoComplete="fname"
+                name="SolutionPdf"
+                variant="outlined"
+                fullWidth
+                id="pdfLink"
+                label="Any Product/Service/Solution Details (Link to PDF. Link should be public)"
+                value={pdfLink} 
+                onChange={e => setPdfLink(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                autoComplete="fname"
+                name="videoLink"
+                variant="outlined"
+                fullWidth
+                id="videoLink"
+                label="Any Video Animation (Link to the video. Link should be public)"
+                value={videoLink} 
+                onChange={e => setVideoLink(e.target.value)}
+              />
             </Grid>
           </Grid>
           <Button
