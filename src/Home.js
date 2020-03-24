@@ -52,11 +52,12 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     height: '100%',
+    width : '100%',
     display: 'flex',
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '50%', // 16:9
   },
   cardContent: {
     flexGrow: 1,
@@ -148,7 +149,7 @@ export default function Home() {
                   <CardMedia
                     className={classes.cardMedia}
                     image={Banner}
-                    title="STARTUP ODISHA HACKATHON 2020"
+                    title="STARTUP ODISHA COVID-19 CHALLENGE 2020"
                   />
                   
                 </Card>
@@ -187,6 +188,63 @@ export default function Home() {
           </Container>
         </div>
   
+  <Container>
+    <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
+              <u><b>About</b></u>
+            </Typography>
+        <Typography variant="body1" align="justify" color="textSecondary" paragraph>
+             The government of Odisha has taken all necessary steps and ensure the preparedness to fight
+against the pandemic of COVID-19- the Corona Virus. With the active support of the people of
+Odisha, The government is trying to contain the spread of the Virus in the state. Further, to
+support the government in empowering the citizens with the right information and taking
+precautions as per the advisories being issued by the Government.
+Further, innovators and Startups are requested to participate in the challenge by providing their
+innovative technologies and innovative solutions, Bioinformatics, datasets, Apps for diagnosis
+etc that can be leveraged for strengthening the fight against Coronavirus.
+           </Typography>
+  </Container>
+
+  <Container>
+    <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
+              <u><b>Eligibility Criteria</b></u>
+            </Typography>
+     <Typography variant="body1" align="justify" color="black" paragraph>
+              <ul>
+                <li>
+                 Individuals or Startups working on or developed any innovative solution that will be used
+to fight against Coronavirus.
+                </li>
+                <li>
+                  For the product to be developed as part of COVID 19 Innovation Challenge, if any
+IPR/Patent is being used, contesting entity must possess the legitimate rights to use the
+IPR/Patents.
+                </li>
+                <li>
+                  <b>Startup Odisha will have the right to choose all submitted solutions and consider it for
+deployment by scaling it up, if found feasible.</b>
+                </li>
+              </ul>
+              
+           </Typography>
+  </Container>
+
+  <Container>
+    <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
+              <u><b>Timeline</b></u>
+            </Typography>
+     <Typography variant="body1" align="justify" color="black" paragraph>
+              <ul>
+                <li>
+                 <b>Launch of the challenge-</b> : 24th March, 2020
+                </li>
+                <li>
+                  <b>Last date for submission of the solution-</b> : 30th March, 2020
+                </li>
+              </ul>
+              
+           </Typography>
+  </Container>
+
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
               <u><b>Problem Statement</b></u>
@@ -256,29 +314,6 @@ curb postponement of exams.
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              <u><b>Outcomes</b></u>
-            </Typography>
-     <Typography variant="body1" align="justify" color="black" paragraph>
-              <ul>
-                <li>
-                  Top project shall be given awards of INR 1,00,000 (Rupees One Lakh only)
-                </li>
-                <li>
-                  Accreditation and Financial support to develop idea into a prototype and final product
-                </li>
-                <li>
-                  Jharkhand State Government may work with the winner for further solution development and its implementation by deploying the suggested product/service into the system.
-                </li>
-                <li>
-                  Incubation support, consultation support will be provided through Atal Bihari Vajpayee Innovation Lab.
-                </li>
-              
-              </ul>
-           </Typography>
-  </Container>
-
-  <Container>
-    <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
               <u><b>Rules and Regulations</b></u>
             </Typography>
           <Typography variant="body1" align="center" color="primary" gutterBottom>
@@ -342,6 +377,7 @@ curb postponement of exams.
               
               </ul>
            </Typography>
+           
   </Container>
     
 
@@ -362,6 +398,10 @@ curb postponement of exams.
         email : startup.odisha@gov.in
               </p>
            </Typography>
+           <Typography component="h5" variant="h5" align="center" color="primary">
+            <b>“Let's play a part in fighting against #coronavirus!”</b>
+           </Typography>
+           <br/>
   </Container>
 
 
