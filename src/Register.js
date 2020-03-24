@@ -103,8 +103,6 @@ export default function Register() {
   const [solution, setSolution] = useState("");
   const [exist, setExist] = useState("");
   const [tech, setTech] = useState("");
-  const [protoBudget, setProtoBudget] = useState("");
-  const [prodBudget, setProdBudget] = useState("");
   const [requirement, setRequirement] = useState("");
   const [openNotify, setOpenNotify] = useState("");
   const [msgNotify, setMsgNotify] = useState("");
@@ -126,7 +124,7 @@ export default function Register() {
     setOpenNotify(false);
   };
 
-  const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement, category, videoLink, pdfLink) => {
+  const submit = (teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, requirement, category, videoLink, pdfLink) => {
   let data = {};
   data["Team Name"] = teamName;
   data["State UT"] = stateUt;
@@ -141,8 +139,6 @@ export default function Register() {
   data["Problem Solution"] = solution;
   data["If Product Exists"] = exist;
   data["Technology used"] = tech;
-  data["Budget for Prototype"] = protoBudget;
-  data["Budget for Product"] = prodBudget;
   data["Specific requirement for execution"] = requirement;
   data["Category"] = category;
   data["Video Link"] = videoLink;
@@ -216,7 +212,7 @@ export default function Register() {
                 required
                 fullWidth
                 id="teamName"
-                label="Team Name"
+                label="Team Name/Applicant Name"
                 autoFocus
                 value={teamName} 
                 onChange={e => setTeamName(e.target.value)}
@@ -344,13 +340,13 @@ export default function Register() {
             </Grid>
 
             <Grid item xs={12} md={12}>
-              <TextField value={description} onChange={e => setDescription(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Idea description (Max 500 characters)" />
+              <TextField value={description} onChange={e => setDescription(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Solution description (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={12}>
               <TextField value={solution} onChange={e => setSolution(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Problem Solution (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <InputLabel id="demo-simple-select-label">Phase of Idea</InputLabel>
+              <InputLabel id="demo-simple-select-label">Phase of Solution</InputLabel>
                 <Select
                   variant="outlined"
                   style={{'width' : '100%'}}
@@ -426,13 +422,7 @@ export default function Register() {
               <TextField value={tech} onChange={e => setTech(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Specify Technology, Tools, Architecture used in the solution (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={12}>
-              <TextField value={protoBudget} onChange={e => setProtoBudget(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Prototype Development in Rs (Approx.)  (Max 500 characters)" />
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <TextField value={prodBudget} onChange={e => setProdBudget(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Budget for Minimal Viable product in Rs (Approx.) (Max 500 characters)" />
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <TextField value={requirement} onChange={e => setRequirement(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your idea (Max 500 characters)" />
+              <TextField value={requirement} onChange={e => setRequirement(e.target.value)} style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Any Specific requirement for the execution of your solution (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} sm={12}>
               <TextField
@@ -441,7 +431,7 @@ export default function Register() {
                 variant="outlined"
                 fullWidth
                 id="pdfLink"
-                label="Any Product/Service/Solution Details (Link to PDF. Link should be public)"
+                label="Any Product/Service/Solution Details (Public sharable link of PDF in Google Drive)"
                 value={pdfLink} 
                 onChange={e => setPdfLink(e.target.value)}
               />
@@ -453,14 +443,14 @@ export default function Register() {
                 variant="outlined"
                 fullWidth
                 id="videoLink"
-                label="Any Video Animation (Link to the video. Link should be public)"
+                label="Any Video Animation (Public sharable link of Video)"
                 value={videoLink} 
                 onChange={e => setVideoLink(e.target.value)}
               />
             </Grid>
           </Grid>
           <Button
-            onClick = {() => submit(teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement, category, videoLink, pdfLink)}
+            onClick = {() => submit(teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, requirement, category, videoLink, pdfLink)}
             fullWidth
             variant="contained"
             color="primary"

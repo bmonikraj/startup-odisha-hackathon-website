@@ -219,10 +219,7 @@ to fight against Coronavirus.
 IPR/Patent is being used, contesting entity must possess the legitimate rights to use the
 IPR/Patents.
                 </li>
-                <li>
-                  <b>Startup Odisha will have the right to choose all submitted solutions and consider it for
-deployment by scaling it up, if found feasible.</b>
-                </li>
+                
               </ul>
               
            </Typography>
@@ -245,41 +242,7 @@ deployment by scaling it up, if found feasible.</b>
            </Typography>
   </Container>
 
-  <Container>
-    <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              <u><b>Problem Statement</b></u>
-            </Typography>
-        <Typography variant="body1" align="justify" color="textSecondary" paragraph>
-              The current CoVid-19 (Coronavirus) outbreak has seen a heavy and quick deployment of case
-tracking platforms- including data visualizations from outbreaks in different countries and
-provinces. The testing mechanisms have been built through a network of testing laboratories
-that is able to track samples across the board. However, when it comes to tracking community
-cases and management of home based quarantines, there is limited capacities in
-administrations down the line to monitor, enforce and use the same. Moreover, these capacities
-vary greatly across states leading to poorer containment efforts in states with weaker
-administrative bandwidths.
-           </Typography>
-  </Container>
   
-  <Container>
-    <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              <u><b>Main objective of the Hackathon</b></u>
-            </Typography>
-     <Typography variant="body1" align="justify" color="black" paragraph>
-              <ul>
-                <li>
-                  A self-quarantine management app for citizens affected by nCOVID-19.
-                </li>
-                <li>
-                  Safe delivery system of essential commodities during a lockdown.
-                </li>
-                <li>
-                  To device a process/ platform to connect students with teacher. Also develop a system to
-curb postponement of exams.
-                </li>
-              </ul>
-           </Typography>
-  </Container>
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
@@ -314,21 +277,18 @@ curb postponement of exams.
 
   <Container>
     <Typography component="h5" variant="h5" align="center" color="primary" gutterBottom>
-              <u><b>Rules and Regulations</b></u>
+              <u><b>Terms and Conditions</b></u>
             </Typography>
           <Typography variant="body1" align="center" color="primary" gutterBottom>
-              Following are the guidelines for Hackathon which need to be followed by each participant and team:
+              Following are the guidelines for Challenge which need to be followed by each participant and team:
             </Typography>
      <Typography variant="body1" align="justify" color="black" paragraph>
               <ul>
                 <li>
-                  20 Selected participants/ team will have to submit their solution (PowerPoint presentation, working app developed and other) by 29th March 2020, 1500 hrs through https://hackathon.jharkhand.gov.in link.
+                  Selected participants/teams will have to submit their solution (PowerPoint presentation)
                 </li>
                 <li>
-                  The presentation will happen online via Skype or Zoom app. The details will be further communicated.
-                </li>
-                <li>
-                  <b>Teams</b>: The hackathon is a team event with the team size limited to a maximum of 3 people. You are welcomed to register either as an Individual or with your pre-formed teams.
+                  The presentation will happen via online mode, which will be notified further.
                 </li>
                 <li>
                   <b>Solution development</b>: You may use open source/ licensed libraries and other available systems / services such as Google Maps, Facebook Connect, Twitter feeds, AWS services etc.
@@ -340,7 +300,7 @@ curb postponement of exams.
                   <b>Intellectual Property</b>: The intellectual property of your code belongs to organiser and will be used in the public interest.
                 </li>
                 <li>
-                  <b>Participation</b>: The Hackathon is open and available for pan-India participation. Each team can have a maximum participation of 3 members.
+                  <b>Participation</b>: The Challenge is open and available for pan-India participation.
                 </li>
               
               </ul>
@@ -373,6 +333,10 @@ curb postponement of exams.
                 </li>
                 <li>
                 Any malicious attempt will lead to disqualification of the team.
+                </li>
+                <li>
+                  <b>Startup Odisha will have the right to choose all submitted solutions and consider it for
+deployment by scaling it up, if found feasible.</b>
                 </li>
               
               </ul>
