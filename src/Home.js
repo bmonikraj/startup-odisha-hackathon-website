@@ -159,7 +159,7 @@ export default function Home() {
         <div className={classes.heroContent}>
           <Container>
             <Typography component="h4" variant="h4" align="center" color="primary" gutterBottom>
-              <b>STARTUP ODISHA HACKATHON on <i>“Fighting Back nCOVID-19”</i></b>
+              <b>STARTUP ODISHA COVID-19 CHALLENGE on <i>“Fighting Back nCOVID-19”</i></b>
             </Typography>
             <Typography variant="subtitle1" align="center" color="black" paragraph>
               <b>Startup Odisha proposes to conduct a virtual hackathon on fighting back nCOVID-19.</b>

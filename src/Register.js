@@ -204,7 +204,7 @@ export default function Register() {
           <WbIncandescentIcon />
         </Avatar>
         <Typography component="h1" variant="h5" align='center' color="primary">
-          STARTUP ODISHA HACKATHON 2020 Registration
+          STARTUP ODISHA COVID-19 CHALLENGE 2020 Registration
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -460,7 +460,7 @@ export default function Register() {
             </Grid>
           </Grid>
           <Button
-            onClick = {() => submit(teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement)}
+            onClick = {() => submit(teamName, stateUt, city, contactNo, email, regNo, noOfParticipants, description, phase, YOL, solution, exist, tech, protoBudget, prodBudget, requirement, category, videoLink, pdfLink)}
             fullWidth
             variant="contained"
             color="primary"
