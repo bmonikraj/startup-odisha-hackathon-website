@@ -232,10 +232,10 @@ IPR/Patents.
      <Typography variant="body1" align="justify" color="black" paragraph>
               <ul>
                 <li>
-                 <b>Launch of the challenge-</b> : 24th March, 2020
+                 <b>Launch of the challenge-</b> : 26th March, 2020
                 </li>
                 <li>
-                  <b>Last date for submission of the solution-</b> : 30th March, 2020
+                  <b>Last date for submission of the solution-</b> : 5th April, 2020
                 </li>
               </ul>
               

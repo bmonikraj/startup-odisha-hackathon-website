@@ -340,7 +340,7 @@ export default function Register() {
             </Grid>
 
             <Grid item xs={12} md={12}>
-              <TextField value={description} onChange={e => setDescription(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Solution description (Max 500 characters)" />
+              <TextField value={description} onChange={e => setDescription(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Problem description (Max 500 characters)" />
             </Grid>
             <Grid item xs={12} md={12}>
               <TextField value={solution} onChange={e => setSolution(e.target.value)}  style={{'width' : '100%'}} multiline rows={10} required id="standard-required" label="Problem Solution (Max 500 characters)" />
